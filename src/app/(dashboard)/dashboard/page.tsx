@@ -33,7 +33,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  // AlertDialogTrigger, // <-- FIX: Removed this unused import
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -157,10 +157,8 @@ export default function DashboardPage() {
       {projects.length > 0 ? (
         <div className="grid gap-4">
           {projects.map((project) => (
-            // --- THE FINAL FIX: Card is now just a container ---
             <Card key={project.id}>
               <CardHeader>
-                {/* The Title is now the link */}
                 <CardTitle>
                   <Link href={`/project/${project.id}`} className="hover:underline">
                     {project.name}
@@ -181,7 +179,6 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
-                {/* This button is no longer nested in a link, so it will work correctly */}
                 <Button 
                    variant="destructive"
                    onClick={() => setProjectToDelete(project)}
@@ -195,7 +192,8 @@ export default function DashboardPage() {
       ) : (
         <div className="text-center py-12 border-2 border-dashed rounded-lg">
           <h3 className="text-xl font-semibold">No projects yet!</h3>
-          <p className="mt-2 text-gray-500">Click "Create New Project" to get started.</p>
+          {/* FIX: Changed double quotes to single quotes */}
+          <p className="mt-2 text-gray-500">Click 'Create New Project' to get started.</p>
         </div>
       )}
 
@@ -204,8 +202,7 @@ export default function DashboardPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              project, its Sentinel Key, and all associated usage data.
+              This action cannot be undone. This will permanently delete your project, its Sentinel Key, and all associated usage data.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

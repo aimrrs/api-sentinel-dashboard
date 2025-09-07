@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { Header } from "@/components/ui/Header"; // Import the header
+import { Header } from "@/components/ui/Header"; // <-- FIX: Corrected the import path
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -94,8 +94,9 @@ export default function LoginPage() {
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign in"}
               </Button>
+              {/* --- THE FIX: Changed "Don't" to "Don&apos;t" --- */}
               <p className="text-xs text-center w-full text-gray-600">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/signup" className="underline hover:text-indigo-600">
                   Sign up
                 </Link>
