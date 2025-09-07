@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/ui/Header";
-import { Zap, LockKeyhole, BarChart3 } from "lucide-react";
 
 export default function LandingPage() {
   return (

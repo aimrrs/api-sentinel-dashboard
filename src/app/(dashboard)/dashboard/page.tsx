@@ -93,7 +93,7 @@ export default function DashboardPage() {
     try {
       await deleteProject(projectToDelete.id);
       setProjects(projects.filter((p) => p.id !== projectToDelete.id));
-      toast.success(`Project '${projectToDelete.name}' deleted successfully!`);
+      toast.success(`Project &apos;${projectToDelete.name}&apos; deleted successfully!`);
     } catch (error) {
       console.error("Failed to delete project:", error);
       toast.error("Failed to delete project. Please try again.");
@@ -193,7 +193,7 @@ export default function DashboardPage() {
         <div className="text-center py-12 border-2 border-dashed rounded-lg">
           <h3 className="text-xl font-semibold">No projects yet!</h3>
           {/* FIX: Changed double quotes to single quotes */}
-          <p className="mt-2 text-gray-500">Click 'Create New Project' to get started.</p>
+          <p className="mt-2 text-gray-500">Click &apos;Create New Project&apos; to get started.</p>
         </div>
       )}
 
