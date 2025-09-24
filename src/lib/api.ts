@@ -83,4 +83,9 @@ export const updateProjectBudget = async (projectId: number, new_budget: number)
   return response.data;
 };
 
+export const getProjectModelAnalytics = async (projectId: number) => {
+  const response = await api.get(`/v1/projects/${projectId}/model-analytics`);
+  return response.data;
+};
+
 export default api;
