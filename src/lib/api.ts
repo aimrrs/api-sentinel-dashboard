@@ -73,4 +73,9 @@ export const resetPassword = async (token: string, new_password: string) => {
   return response.data;
 };
 
+export const getProjectAnalytics = async (projectId: number) => {
+  const response = await api.get(`/v1/projects/${projectId}/analytics`);
+  return response.data;
+};
+
 export default api;
