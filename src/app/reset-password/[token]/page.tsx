@@ -15,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { Header } from "@/components/ui/Header";
+import axios from "axios"; // Import axios to check for its error type
 
-// This component receives the 'token' from the URL as a parameter
 export default function ResetPasswordPage({ params }: { params: { token: string } }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -38,8 +38,14 @@ export default function ResetPasswordPage({ params }: { params: { token: string 
     try {
       const response = await resetPassword(token, newPassword);
       setMessage(response.message);
-    } catch (error: any) {
-      setError(error.response?.data?.detail || "An unexpected error occurred.");
+    } catch (error: unknown) { // <-- FIX: Changed 'any' to 'unknown'
+      // --- FIX: Type check for the error ---
+      if (axios.isAxiosError(error) && error.response) {
+        setError(error.response.data.detail || "An unexpected error occurred.");
+      } else {
+        setError("An unexpected error occurred.");
+      }
+      console.error("Reset password failed:", error);
     } finally {
       setIsLoading(false);
     }
@@ -103,3 +109,4 @@ export default function ResetPasswordPage({ params }: { params: { token: string 
     </div>
   );
 }
+
