@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { Header } from "@/components/ui/Header"; // <-- FIX: Corrected the import path
+import { Header } from "@/components/ui/Header";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -26,14 +26,12 @@ export default function LoginPage() {
   const { login, isAuthenticated, isLoading: isAuthLoading } = useAuth();
   const router = useRouter();
 
-  // Redirect if user is already logged in
   useEffect(() => {
     if (isAuthLoading) return;
     if (isAuthenticated) {
       router.push("/dashboard");
     }
   }, [isAuthenticated, isAuthLoading, router]);
-
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -56,7 +54,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header /> {/* Use the consistent header */}
+      <Header />
       <main className="flex-1 flex flex-col items-center justify-center">
         <Card className="w-full max-w-sm">
           <CardHeader>
@@ -79,7 +77,16 @@ export default function LoginPage() {
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  {/* --- THIS IS THE NEW LINK --- */}
+                  <Link
+                    href="/forgot-password"
+                    className="text-xs text-indigo-600 hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
                 <Input
                   id="password"
                   type="password"
@@ -94,7 +101,6 @@ export default function LoginPage() {
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign in"}
               </Button>
-              {/* --- THE FIX: Changed "Don't" to "Don&apos;t" --- */}
               <p className="text-xs text-center w-full text-gray-600">
                 Don&apos;t have an account?{" "}
                 <Link href="/signup" className="underline hover:text-indigo-600">
@@ -105,11 +111,6 @@ export default function LoginPage() {
           </form>
         </Card>
       </main>
-      <footer className="w-full py-6 px-4 md:px-6">
-        <p className="text-center text-xs text-gray-500">
-          © 2025 API Sentinel. Product of aimrrs.
-        </p>
-      </footer>
     </div>
   );
 }
