@@ -78,4 +78,9 @@ export const getProjectAnalytics = async (projectId: number) => {
   return response.data;
 };
 
+export const updateProjectBudget = async (projectId: number, new_budget: number) => {
+  const response = await api.patch(`/projects/${projectId}/budget`, { new_budget });
+  return response.data;
+};
+
 export default api;
